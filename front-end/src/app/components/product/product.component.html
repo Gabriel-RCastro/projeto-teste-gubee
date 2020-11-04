@@ -1,0 +1,64 @@
+<div>
+  <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: rebeccapurple">
+    <a class="navbar-brand" href="#" style="color: yellow">Gubee Tecnologia</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+      aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+  </nav>
+</div>
+
+<div class="container">
+  <form>
+    <label for="inputText" class="mt-3">FILTRAR POR:</label>
+    <div class="form-row align-items-center">
+      <div class="col-auto">
+        <select id="inputState" class="form-control" #optionSearch (change)="0">
+          <option value="Technology">Tecnologia</option>
+          <option value="Target">Mercado</option>
+        </select>
+      </div>
+      <div class="col-auto">
+        <input #txtSearch type="text" class="form-control ">
+      </div>
+      <div class="col-auto">
+        <button class="btn btn-primary">Buscar</button>
+      </div>
+    </div>
+  </form>
+
+  <div class="alert alert-dark mt-3" role="alert">
+    LISTA DE PRODUTOS:
+  </div>
+
+  <div class="row">
+    <div class="col">
+      <table class="table table-bordered" id="table">
+        <thead class="thead-dark" style="text-align:center">
+          <tr>
+            <th scope="col">Nome</th>
+            <th scope="col">Descrição</th>
+            <th scope="col">Tecnologias</th>
+            <th scope="col">Mercado Alvo</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let product of products">
+            <td>{{ product.productName }}</td>
+            <td>{{ product.description }}</td>
+            <td>
+              <ul *ngFor="let stack of product.stack">
+                <li>{{ stack }}</li>
+              </ul>
+            </td>
+            <td>
+              <ul *ngFor="let target of product.targetMarket">
+                <li>{{ target }}</li>
+              </ul>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
