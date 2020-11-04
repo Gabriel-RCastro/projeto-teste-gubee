@@ -1,20 +1,26 @@
-import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
-import { Product } from '../models/iProduct.model';
+import {HttpClient} from '@angular/common/http';
+import {Injectable} from '@angular/core';
+import {Product} from '../models/product.model';
 
-import { take } from 'rxjs/operators'
+import {Observable} from 'rxjs';
+import {filter, map} from 'rxjs/operators';
+import {Stack} from '../models/stack.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProductService {
 
-  url = 'http://localhost:3000/products'; // api rest fake
+  url = './assets/dados/gubee-teste.json';
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {
+  }
 
-  getProducts() {
-    return this.http.get<Product[]>(this.url).pipe(take(1));
+  getProducts(): Observable<Product[]> {
+    return this.http.get<Product[]>(this.url);
+  }
+
+  getStacks(name: string) {
   }
 
   // Exemplo

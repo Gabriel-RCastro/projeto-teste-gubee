@@ -1,7 +1,7 @@
-import { ProductService } from './../../services/product.service';
-import { Component, OnInit } from '@angular/core';
+import {ProductService} from './../../services/product.service';
+import {Component, OnInit} from '@angular/core';
 
-import { Product } from 'src/app/models/iProduct.model';
+import {Product} from 'src/app/models/product.model';
 
 @Component({
   selector: 'app-product',
@@ -11,13 +11,24 @@ import { Product } from 'src/app/models/iProduct.model';
 export class ProductComponent implements OnInit {
 
   products: Product[];
-  words: any[];
+  stacks: any[];
 
   constructor(private productService: ProductService) {
   }
 
   ngOnInit() {
-    this.productService.getProducts()
+    this.getProducts();
+  }
+
+  getProducts() {
+    return this.productService.getProducts()
       .subscribe(dados => this.products = dados);
   }
+
+  getProductsByStack(name: string) {
+  }
+
+  getProductsByTarget(name: string) {
+  }
+
 }
