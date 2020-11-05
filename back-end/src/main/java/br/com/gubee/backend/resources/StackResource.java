@@ -1,7 +1,7 @@
 package br.com.gubee.backend.resources;
 
-import br.com.gubee.backend.entities.Product;
-import br.com.gubee.backend.services.ProductService;
+import br.com.gubee.backend.entities.Stack;
+import br.com.gubee.backend.services.StackService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,21 +12,21 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@RequestMapping(value = "/products")
-public class ProductResource {
+@RequestMapping(value = "/stacks")
+public class StackResource {
 
     @Autowired
-    private ProductService service;
+    private StackService service;
 
     @GetMapping
-    public ResponseEntity<List<Product>> findAll() {
-        List<Product> list = service.findAll();
+    public ResponseEntity<List<Stack>> findAll() {
+        List<Stack> list = service.findAll();
         return ResponseEntity.ok().body(list);
     }
 
     @GetMapping(value = "/{id}")
-    public ResponseEntity<Product> findById(@PathVariable Long id) {
-        Product obj = service.findById(id);
+    public ResponseEntity<Stack> findById(@PathVariable Long id) {
+        Stack obj = service.findById(id);
         return ResponseEntity.ok().body(obj);
     }
 }
