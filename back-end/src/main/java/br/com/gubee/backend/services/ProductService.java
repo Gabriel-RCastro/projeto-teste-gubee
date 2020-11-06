@@ -2,6 +2,7 @@ package br.com.gubee.backend.services;
 
 import br.com.gubee.backend.entities.Product;
 import br.com.gubee.backend.repositories.ProductRepository;
+import br.com.gubee.backend.services.exceptions.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,6 +21,6 @@ public class ProductService {
 
     public Product findById(Long id) {
         Optional<Product> obj = productRepository.findById(id);
-        return obj.get();
+        return obj.orElseThrow(() -> new ResourceNotFoundException(id));
     }
 }

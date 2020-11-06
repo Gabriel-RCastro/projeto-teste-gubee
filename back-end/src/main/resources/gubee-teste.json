@@ -1,0 +1,36 @@
+[
+  {
+    "productName": "Gubee Integrador",
+    "description": "Ferramenta de integração para marketplaces",
+    "targetMarket": [
+      {
+        "name": "Ecommerce"
+      }
+    ],
+    "stack": [
+      {
+        "name": "Java 10"
+      },
+      {
+        "name": "Kotlin"
+      }
+    ]
+  },
+  {
+    "productName": "Gubee Fretes",
+    "description": "Ferramenta para gestão e calculo de fretes",
+    "targetMarket": [
+      {
+        "name": "Ecommerce"
+      },
+      {
+        "name": "ERP"
+      }
+    ],
+    "stack": [
+      {
+        "name": "Kotlin"
+      }
+    ]
+  }
+]

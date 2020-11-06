@@ -1,11 +1,8 @@
 package br.com.gubee.backend.entities;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.sun.istack.NotNull;
-
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.HashSet;
+import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
@@ -15,23 +12,24 @@ public class Product implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @NotNull
-    private String name;
+    private String productName;
     private String description;
 
-    @ManyToMany(fetch = FetchType.LAZY)
-    private final Set<Stack> stacks = new HashSet<>();
+    @ManyToMany
+    private Set<TargetMarket> targetMarket;
 
-    @ManyToMany(fetch = FetchType.LAZY)
-    private final Set<Target> targets = new HashSet<>();
+    @ManyToMany
+    private Set<Stack> stack;
 
     public Product() {
     }
 
-    public Product(Long id, String name, String description) {
+    public Product(Long id, String productName, String description, Set<TargetMarket> targetMarket, Set<Stack> stack) {
         this.id = id;
-        this.name = name;
+        this.productName = productName;
         this.description = description;
+        this.targetMarket = targetMarket;
+        this.stack = stack;
     }
 
     public Long getId() {
@@ -42,12 +40,12 @@ public class Product implements Serializable {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getProductName() {
+        return productName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setProductName(String productName) {
+        this.productName = productName;
     }
 
     public String getDescription() {
@@ -58,12 +56,12 @@ public class Product implements Serializable {
         this.description = description;
     }
 
-    public Set<Stack> getStacks() {
-        return stacks;
+    public Set<TargetMarket> getTargetMarket() {
+        return targetMarket;
     }
 
-    public Set<Target> getTargets() {
-        return targets;
+    public Set<Stack> getStack() {
+        return stack;
     }
 
     @Override

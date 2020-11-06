@@ -2,6 +2,7 @@ package br.com.gubee.backend.services;
 
 import br.com.gubee.backend.entities.Stack;
 import br.com.gubee.backend.repositories.StackRepository;
+import br.com.gubee.backend.services.exceptions.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,7 +21,6 @@ public class StackService {
 
     public Stack findById(Long id) {
         Optional<Stack> obj = stackRepository.findById(id);
-        return obj.get();
+        return obj.orElseThrow(() -> new ResourceNotFoundException(id));
     }
-
 }

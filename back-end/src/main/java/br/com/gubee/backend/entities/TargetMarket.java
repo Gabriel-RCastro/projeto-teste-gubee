@@ -7,7 +7,7 @@ import java.io.Serializable;
 import java.util.Objects;
 
 @Entity
-public class Target implements Serializable {
+public class TargetMarket implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -15,10 +15,10 @@ public class Target implements Serializable {
     @NotNull
     private String name;
 
-    public Target() {
+    public TargetMarket() {
     }
 
-    public Target(Long id, String name) {
+    public TargetMarket(Long id, String name) {
         this.id = id;
         this.name = name;
     }
@@ -43,7 +43,7 @@ public class Target implements Serializable {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Target target = (Target) o;
+        TargetMarket target = (TargetMarket) o;
         return Objects.equals(id, target.id);
     }
 
