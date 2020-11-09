@@ -1,7 +1,12 @@
 package br.com.gubee.backend.entities;
 
+import com.google.gson.Gson;
+import com.google.gson.JsonElement;
+
 import javax.persistence.*;
 import java.io.Serializable;
+import java.lang.reflect.Type;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
 import java.util.Set;
@@ -16,20 +21,18 @@ public class Product implements Serializable {
     private String description;
 
     @ManyToMany
-    private Set<TargetMarket> targetMarket;
+    private Set<TargetMarket> targetMarket = new HashSet<>();
 
     @ManyToMany
-    private Set<Stack> stack;
+    private Set<Stack> stack = new HashSet<>();
 
     public Product() {
     }
 
-    public Product(Long id, String productName, String description, Set<TargetMarket> targetMarket, Set<Stack> stack) {
+    public Product(Long id, String productName, String description) {
         this.id = id;
         this.productName = productName;
         this.description = description;
-        this.targetMarket = targetMarket;
-        this.stack = stack;
     }
 
     public Long getId() {

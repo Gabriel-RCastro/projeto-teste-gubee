@@ -1,7 +1,7 @@
 package br.com.gubee.backend.services;
 
 import br.com.gubee.backend.entities.TargetMarket;
-import br.com.gubee.backend.repositories.TargetRepository;
+import br.com.gubee.backend.repositories.TargetMarketRepository;
 import br.com.gubee.backend.services.exceptions.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,7 +13,7 @@ import java.util.Optional;
 public class TargetMarketService {
 
     @Autowired
-    private TargetRepository targetRepository;
+    private TargetMarketRepository targetRepository;
 
     public List<TargetMarket> findAll() {
         return targetRepository.findAll();

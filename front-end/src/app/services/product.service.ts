@@ -11,7 +11,7 @@ import {Stack} from '../models/stack.model';
 })
 export class ProductService {
 
-  url = './assets/dados/gubee-teste.json';
+  url = 'https://teste-gubee.herokuapp.com/products';
 
   constructor(private http: HttpClient) {
   }
