@@ -23,4 +23,9 @@ public class StackService {
         Optional<Stack> obj = stackRepository.findById(id);
         return obj.orElseThrow(() -> new ResourceNotFoundException(id));
     }
+
+    public Stack findByName(String name) {
+        Optional<Stack> obj = stackRepository.findByName(name);
+        return obj.orElseThrow(() -> new ResourceNotFoundException(name));
+    }
 }

@@ -1,4 +1,4 @@
 export interface Target {
   id: number;
-  nome: string;
+  name: string;
 }

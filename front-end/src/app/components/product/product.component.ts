@@ -1,7 +1,8 @@
-import {ProductService} from './../../services/product.service';
-import {Component, OnInit} from '@angular/core';
+import { ProductService } from './../../services/product.service';
+import { Component, OnInit } from '@angular/core';
 
-import {Product} from 'src/app/models/product.model';
+import { Product } from 'src/app/models/product.model';
+import { Stack } from 'src/app/models/stack.model';
 
 @Component({
   selector: 'app-product',
@@ -11,7 +12,8 @@ import {Product} from 'src/app/models/product.model';
 export class ProductComponent implements OnInit {
 
   products: Product[];
-  stacks: any[];
+  stacks: Stack[];
+  txtSearch;
 
   constructor(private productService: ProductService) {
   }
@@ -26,9 +28,20 @@ export class ProductComponent implements OnInit {
   }
 
   getProductsByStack(name: string) {
+    if (name && (name = name.trim()) !== '') {
+      return this.productService.getProductsByStack(name)
+        .subscribe(dados => this.products = dados);
+    } else {
+      this.getProducts();
+    }
   }
 
-  getProductsByTarget(name: string) {
+  getProductsByTargetMarket(name: string) {
+    if (name && (name = name.trim()) !== '') {
+      return this.productService.getProductsByTargetMarket(name)
+        .subscribe(dados => this.products = dados);
+    } else {
+      this.getProducts();
+    }
   }
-
 }

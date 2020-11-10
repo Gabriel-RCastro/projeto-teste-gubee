@@ -1,0 +1,11 @@
+{
+    "/api/*": {
+      "target": "https://teste-gubee.herokuapp.com",
+      "secure": false,
+      "logLevel": "debug",
+      "pathRewrite": {
+        "^/api": ""
+      }
+    }
+  }
+  

@@ -12,9 +12,6 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
 
 import java.util.Arrays;
-import java.util.Collection;
-import java.util.Iterator;
-import java.util.Set;
 
 @Configuration
 @Profile("test")
@@ -51,6 +48,7 @@ public class TesteConfig implements CommandLineRunner {
         p1.getStack().add(s1);
         p1.getStack().add(s2);
         p2.getStack().add(s2);
+        p2.getStack().add(s3);
 
         p1.getTargetMarket().add(t1);
         p2.getTargetMarket().add(t1);

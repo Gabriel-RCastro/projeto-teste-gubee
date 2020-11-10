@@ -23,4 +23,9 @@ public class TargetMarketService {
         Optional<TargetMarket> obj = targetRepository.findById(id);
         return obj.orElseThrow(() -> new ResourceNotFoundException(id));
     }
+
+    public TargetMarket findByName(String name) {
+        Optional<TargetMarket> obj = targetRepository.findByName(name);
+        return obj.orElseThrow(() -> new ResourceNotFoundException(name));
+    }
 }

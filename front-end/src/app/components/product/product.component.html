@@ -2,7 +2,7 @@
   <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: rebeccapurple">
     <a class="navbar-brand" href="#" style="color: yellow">Gubee Tecnologia</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
-            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
   </nav>
@@ -19,15 +19,15 @@
         </select>
       </div>
       <div class="col-auto">
-        <input #txtSearch type="text" class="form-control">
+        <input type="text" class="form-control" [(ngModel)]="txtSearch" name="txtSearch">
       </div>
       <div class="col-auto">
-        <button *ngIf="optionSearch.value == 'Stack'" class="btn btn-primary"
-                (click)="getProductsByStack(txtSearch.value)">Buscar
+        <!-- <button *ngIf="optionSearch.value == 'Stack'" class="btn btn-primary"
+          (click)="getProductsByStack(txtSearch.value)">Buscar
         </button>
         <button *ngIf="optionSearch.value == 'Target'" class="btn btn-primary"
-                (click)="getProductsByTarget(txtSearch.value)">Buscar
-        </button>
+          (click)="getProductsByTargetMarket(txtSearch.value)">Buscar
+        </button> -->
       </div>
     </div>
   </form>
@@ -40,28 +40,28 @@
     <div class="col">
       <table class="table table-bordered" id="table" data-search="true">
         <thead class="thead-dark" style="text-align:center">
-        <tr>
-          <th scope="col">Nome</th>
-          <th scope="col">Descrição</th>
-          <th scope="col">Tecnologias</th>
-          <th scope="col">Mercado Alvo</th>
-        </tr>
+          <tr>
+            <th scope="col">Nome</th>
+            <th scope="col">Descrição</th>
+            <th scope="col">Tecnologias</th>
+            <th scope="col">Mercado Alvo</th>
+          </tr>
         </thead>
         <tbody>
-        <tr *ngFor="let product of products">
-          <td>{{ product.productName }}</td>
-          <td>{{ product.description }}</td>
-          <td>
-            <ul *ngFor="let stack of product.stack">
-              <li>{{ stack }}</li>
-            </ul>
-          </td>
-          <td>
-            <ul *ngFor="let target of product.targetMarket">
-              <li>{{ target }}</li>
-            </ul>
-          </td>
-        </tr>
+          <tr *ngFor="let product of products | filter: txtSearch; let i = index">
+            <td>{{ product.productName }}</td>
+            <td>{{ product.description }}</td>
+            <td>
+              <ul>
+                <li *ngFor="let stack of product.stack | filter: txtSearch; let i = index">{{ stack.name }}</li>
+              </ul>
+            </td>
+            <td>
+              <ul>
+                <li *ngFor="let targetMarket of product.targetMarket">{{ targetMarket.name}}</li>
+              </ul>
+            </td>
+          </tr>
         </tbody>
       </table>
     </div>

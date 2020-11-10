@@ -1,7 +1,5 @@
 package br.com.gubee.backend.entities;
 
-import com.sun.istack.NotNull;
-
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Objects;
@@ -12,7 +10,6 @@ public class TargetMarket implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @NotNull
     private String name;
 
     public TargetMarket() {
