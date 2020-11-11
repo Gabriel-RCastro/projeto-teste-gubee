@@ -3,41 +3,49 @@ import { Injectable } from '@angular/core';
 import { Product } from '../models/product.model';
 
 import { Observable } from 'rxjs';
-import { filter, map } from 'rxjs/operators';
-import { Stack } from '../models/stack.model';
+import { distinct, distinctUntilChanged, map } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
+import { ppid } from 'process';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProductService {
 
-  private readonly API = `${environment.API}/products`;
+  private readonly API = environment.API;
 
   constructor(private http: HttpClient) {
   }
 
   getProducts(): Observable<Product[]> {
-    return this.http.get<Product[]>(this.API);
+    return this.http.get<Product[]>(`${this.API}/products`).pipe(
+      distinctUntilChanged((prev, curr) => prev.filter(p => p.productName) !== curr.filter(c => c.productName))
+    );
   }
 
   getProductsByStack(name: string) {
-    return this.http.get<Product[]>(this.API).pipe(
-      map((products: Product[]) => products.filter(p => p.stack.filter(s => s.name == name)))
-    );
+    return this.myFilter('stack', name);
   }
 
   getProductsByTargetMarket(name: string) {
-    return this.http.get<Product[]>(this.API).pipe(
-      map((products: Product[]) => products.filter(p => p.targetMarket.map(t => t.name == name)))
-    );
+    return this.myFilter('targetMarket', name);
   }
 
-  // Exemplo
-  // getCidadesBr(idEstado: number) {
-  //   return this.http.get<CidadeBr[]>('assets/dados/cidadesbr.json').pipe(
-  //     map((cidades: CidadeBr[]) => cidades.filter(c => c.estado == idEstado))
-  //   );
-  // }
-
+  private myFilter(tableName: string, name: string) {
+    return this.http.get<Product[]>(`${this.API}/products`).pipe(
+      map((products: Product[]) => products.filter(p => {
+        if (tableName == 'stack') {
+          for (let i = 0; i < p.stack.length; i++)
+            if (p.stack[i].name.toLowerCase().indexOf(name.toLowerCase()) > -1)
+              return p;
+        } else if (tableName == 'targetMarket') {
+          for (let i = 0; i < p.targetMarket.length; i++)
+            if (p.targetMarket[i].name.toLowerCase().indexOf(name.toLowerCase()) > -1)
+              return p;
+        } else {
+          alert("Erro ao carregar produtos filtrados, tente novamente!");
+        }
+      }))
+    );
+  }
 }

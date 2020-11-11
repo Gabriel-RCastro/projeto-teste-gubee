@@ -55,7 +55,7 @@ public class Product implements Serializable {
     }
 
     public Set<TargetMarket> getTargetMarket() {
-        return targetMarket;
+        return Set.copyOf(targetMarket);
     }
 
     public Set<Stack> getStack() {

@@ -2,7 +2,6 @@ package br.com.gubee.backend.resources;
 
 import br.com.gubee.backend.entities.Product;
 import br.com.gubee.backend.services.ProductService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -13,8 +12,11 @@ import java.util.List;
 @RequestMapping(value = "/products")
 public class ProductResource {
 
-    @Autowired
-    private ProductService service;
+    private final ProductService service;
+
+    public ProductResource(ProductService service) {
+        this.service = service;
+    }
 
     @GetMapping
     public ResponseEntity<List<Product>> findAll() {
