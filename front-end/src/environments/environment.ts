@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  API: 'https://teste-gubee.herokuapp.com',
+  API: 'http://localhost:8080',
   BASE_URL: '/api'
 };
 

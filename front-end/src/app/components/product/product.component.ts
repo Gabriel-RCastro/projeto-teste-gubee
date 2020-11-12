@@ -1,4 +1,3 @@
-import { distinct, distinctUntilChanged } from 'rxjs/operators';
 import { ProductService } from './../../services/product.service';
 import { Component, OnInit } from '@angular/core';
 
@@ -23,16 +22,26 @@ export class ProductComponent implements OnInit {
   }
 
   getProducts() {
-    this.productService.getProducts()
+    return this.productService.getProducts()
       .subscribe(dados => this.products = dados);
   }
 
-  getProductsByStack(name: string) {
+  getProductsByFilter(name: string, optionSearch: string) {
+    if (name && (name = name.trim()) !== '') {
+      switch (optionSearch) {
+        case 'stack': return this.getProductsByStack(name);
+        case 'target_market': return this.getProductsByTargetMarket(name);
+      }
+    }
+    return this.getProducts();
+  }
+
+  private getProductsByStack(name: string) {
     return this.productService.getProductsByStack(name)
       .subscribe(dados => this.products = dados);
   }
 
-  getProductsByTargetMarket(name: string) {
+  private getProductsByTargetMarket(name: string) {
     return this.productService.getProductsByTargetMarket(name)
       .subscribe(dados => this.products = dados);
   }

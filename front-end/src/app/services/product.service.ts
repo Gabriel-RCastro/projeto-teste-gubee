@@ -32,20 +32,14 @@ export class ProductService {
   }
 
   private myFilter(tableName: string, name: string) {
-    return this.http.get<Product[]>(`${this.API}/products`).pipe(
-      map((products: Product[]) => products.filter(p => {
-        if (tableName == 'stack') {
-          for (let i = 0; i < p.stack.length; i++)
-            if (p.stack[i].name.toLowerCase().indexOf(name.toLowerCase()) > -1)
-              return p;
-        } else if (tableName == 'targetMarket') {
-          for (let i = 0; i < p.targetMarket.length; i++)
-            if (p.targetMarket[i].name.toLowerCase().indexOf(name.toLowerCase()) > -1)
-              return p;
-        } else {
-          alert("Erro ao carregar produtos filtrados, tente novamente!");
-        }
-      }))
-    );
+    return this.http.get<Product[]>(`${this.API}/products/byFilter/${this.toFilter(tableName)}/${name}`);
+  }
+
+  private toFilter(tableName: string) {
+    var filter = 'STACK';
+    if (tableName == 'targetMarket') {
+      filter ='TARGET_MARKET';
+    }
+    return filter;
   }
 }

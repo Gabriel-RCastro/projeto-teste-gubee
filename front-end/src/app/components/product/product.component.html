@@ -14,18 +14,16 @@
     <div class="form-row align-items-center">
       <div class="col-auto">
         <select id="inputState" class="form-control" #optionSearch (change)="0">
-          <option value="Stack">Tecnologia</option>
-          <option value="Target">Mercado Alvo</option>
+          <option value="stack">Tecnologia</option>
+          <option value="target_market">Mercado Alvo</option>
         </select>
       </div>
       <div class="col-auto">
         <input #txtSearch type="text" class="form-control">
       </div>
-      <div class="col-auto">
-        <button *ngIf="optionSearch.value == 'Stack'" class="btn btn-primary"
-          (click)="getProductsByStack(txtSearch.value)">Buscar</button>
-        <button *ngIf="optionSearch.value == 'Target'" class="btn btn-primary"
-          (click)="getProductsByTargetMarket(txtSearch.value)">Buscar</button>
+      <div class=" col-auto">
+        <button class="btn btn-primary"
+          (click)="getProductsByFilter(txtSearch.value, optionSearch.value)">Buscar</button>
       </div>
     </div>
   </form>
@@ -48,12 +46,16 @@
             <td>{{ product.description }}</td>
             <td>
               <ul>
-                <li *ngFor="let stack of product.stack">{{ stack.name }}</li>
+                <li *ngFor="let stack of product.stack">
+                  {{ stack.name }}
+                </li>
               </ul>
             </td>
             <td>
               <ul>
-                <li *ngFor="let targetMarket of product.targetMarket">{{ targetMarket.name}}</li>
+                <li *ngFor="let targetMarket of product.targetMarket">
+                  {{ targetMarket.name}}
+                </li>
               </ul>
             </td>
           </tr>

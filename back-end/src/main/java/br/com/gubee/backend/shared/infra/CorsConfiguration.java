@@ -1,4 +1,4 @@
-package br.com.gubee.backend.config;
+package br.com.gubee.backend.shared.infra;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
