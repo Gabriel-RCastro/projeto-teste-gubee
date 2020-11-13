@@ -2,7 +2,7 @@ import { ProductService } from './../../services/product.service';
 import { Component, OnInit } from '@angular/core';
 
 import { Product } from 'src/app/models/product.model';
-import { Stack } from 'src/app/models/stack.model';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-product',
@@ -11,8 +11,9 @@ import { Stack } from 'src/app/models/stack.model';
 })
 export class ProductComponent implements OnInit {
 
+  private readonly URL = `${environment.BASE_URL}/products`;
+
   products: Product[];
-  stacks: Stack[];
 
   constructor(private productService: ProductService) {
   }
@@ -22,27 +23,15 @@ export class ProductComponent implements OnInit {
   }
 
   getProducts() {
-    return this.productService.getProducts()
+    return this.productService.getProducts(this.URL)
       .subscribe(dados => this.products = dados);
   }
 
-  getProductsByFilter(name: string, optionSearch: string) {
-    if (name && (name = name.trim()) !== '') {
-      switch (optionSearch) {
-        case 'stack': return this.getProductsByStack(name);
-        case 'target_market': return this.getProductsByTargetMarket(name);
-      }
+  getProductsByFilter(productName: string, selectedOption: string) {
+    if (productName && (productName = productName.trim()) !== '') {
+      return this.productService.getProducts(`${this.URL}/byFilter/${selectedOption}/${productName}`)
+        .subscribe(dados => this.products = dados);
     }
     return this.getProducts();
-  }
-
-  private getProductsByStack(name: string) {
-    return this.productService.getProductsByStack(name)
-      .subscribe(dados => this.products = dados);
-  }
-
-  private getProductsByTargetMarket(name: string) {
-    return this.productService.getProductsByTargetMarket(name)
-      .subscribe(dados => this.products = dados);
   }
 }

@@ -4,7 +4,6 @@ import br.com.gubee.backend.domain.Product;
 import lombok.*;
 
 import javax.persistence.*;
-import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -16,7 +15,7 @@ import static java.util.stream.Collectors.toSet;
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
-public class ProductEntity implements Serializable {
+public class ProductEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -30,16 +29,6 @@ public class ProductEntity implements Serializable {
 
     @ManyToMany
     private Set<StackEntity> stack = new HashSet<>();
-
-    public boolean containTargetMarket(String name) {
-        var nameToLowerCase = name.toLowerCase();
-        return this.targetMarket.stream().anyMatch(s -> s.getName().toLowerCase().contains(nameToLowerCase));
-    }
-
-    public boolean containStack(String name) {
-        var nameToLowerCase = name.toLowerCase();
-        return this.stack.stream().anyMatch(s -> s.getName().toLowerCase().contains(nameToLowerCase));
-    }
 
     public Product toDomain() {
         return Product.builder()

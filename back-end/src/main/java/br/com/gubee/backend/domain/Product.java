@@ -5,7 +5,6 @@ import lombok.*;
 import java.util.HashSet;
 import java.util.Set;
 
-
 @Data
 @Builder
 @NoArgsConstructor
@@ -39,5 +38,4 @@ public class Product {
         var nameToLowerCase = name.toLowerCase();
         return this.stack.stream().anyMatch(s -> s.getName().toLowerCase().contains(nameToLowerCase));
     }
-
 }

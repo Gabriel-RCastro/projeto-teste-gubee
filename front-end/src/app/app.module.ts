@@ -6,7 +6,6 @@ import { AppComponent } from './app.component';
 import { HttpClientModule } from '@angular/common/http';
 import { ProductComponent } from './components/product/product.component';
 import { FormsModule } from '@angular/forms';
-import { Ng2SearchPipeModule } from 'ng2-search-filter';
 
 @NgModule({
   declarations: [
@@ -17,7 +16,6 @@ import { Ng2SearchPipeModule } from 'ng2-search-filter';
     BrowserModule,
     HttpClientModule,
     FormsModule,
-    Ng2SearchPipeModule,
     AppRoutingModule
   ],
   providers: [],

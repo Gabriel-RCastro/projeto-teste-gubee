@@ -13,17 +13,17 @@
     <h6 class="mt-3">FILTRAR POR:</h6>
     <div class="form-row align-items-center">
       <div class="col-auto">
-        <select id="inputState" class="form-control" #optionSearch (change)="0">
-          <option value="stack">Tecnologia</option>
-          <option value="target_market">Mercado Alvo</option>
+        <select id="inputState" class="form-control" #selectedOption>
+          <option value="STACK">Tecnologia</option>
+          <option value="TARGET_MARKET">Mercado Alvo</option>
         </select>
       </div>
       <div class="col-auto">
-        <input #txtSearch type="text" class="form-control">
+        <input #productSearch type="text" class="form-control">
       </div>
       <div class=" col-auto">
         <button class="btn btn-primary"
-          (click)="getProductsByFilter(txtSearch.value, optionSearch.value)">Buscar</button>
+          (click)="getProductsByFilter(productSearch.value, selectedOption.value)">Buscar</button>
       </div>
     </div>
   </form>
